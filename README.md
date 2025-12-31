@@ -3,7 +3,7 @@
 ![Express](https://img.shields.io/badge/Framework-Express-lightgrey)
 ![MongoDB](https://img.shields.io/badge/Database-MongoDB-brightgreen)
 ![Deployment](https://img.shields.io/badge/Deploy-Render-purple)
-![Deployment](https://img.shields.io/badge/Deploy-Vercel-purple)
+![Deployment](https://img.shields.io/badge/Deploy-Vercel-orange)
 
 # Airbnb Clone
 
