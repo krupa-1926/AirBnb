@@ -7,8 +7,11 @@ exports.createBookings = async (req, res) => {
     const { place, checkIn, checkOut, numOfGuests, name, phone, price } =
       req.body;
 
+      if (!req.user) {
+  return res.status(401).json({ message: "Unauthorized" });
+}
     const booking = await Booking.create({
-      user: userData.id,
+      user: req.user._id,
       place,
       checkIn,
       checkOut,
