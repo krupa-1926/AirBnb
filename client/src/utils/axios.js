@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { getItemFromLocalStorage } from '@/utils'
-axios.defaults.withCredentials = true;
+// axios.defaults.withCredentials = true;
 
 const axiosInstance = axios.create({
   // baseURL: "http://localhost:4000",
