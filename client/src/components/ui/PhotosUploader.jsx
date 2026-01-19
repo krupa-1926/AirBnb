@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import Image from './Image';
 import axiosInstance from '../../utils/axios';
+axios.defaults.withCredentials = true;
 
 const PhotosUploader = ({ addedPhotos, setAddedPhotos }) => {
   const [photoLink, setphotoLink] = useState('');

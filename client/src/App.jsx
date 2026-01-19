@@ -19,6 +19,7 @@ import { PlaceProvider } from './providers/PlaceProvider';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { getItemFromLocalStorage } from './utils';
 import NotFoundPage from './pages/NotFoundPage';
+axios.defaults.withCredentials = true;
 
 function App() {
   useEffect(() => {

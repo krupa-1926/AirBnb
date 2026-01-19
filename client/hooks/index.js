@@ -10,7 +10,7 @@ import {
   removeItemFromLocalStorage,
 } from '@/utils';
 import axiosInstance from '@/utils/axios';
-
+axios.defaults.withCredentials = true;
 // USER
 export const useAuth = () => {
   return useContext(UserContext);

@@ -8,6 +8,7 @@ import AccountNav from '@/components/ui/AccountNav';
 import Perks from '@/components/ui/Perks';
 import PhotosUploader from '@/components/ui/PhotosUploader';
 import Spinner from '@/components/ui/Spinner';
+axios.defaults.withCredentials = true;
 
 const PlacesFormPage = () => {
   const { id } = useParams();

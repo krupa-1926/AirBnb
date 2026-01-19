@@ -8,6 +8,7 @@ import AddressLink from '@/components/ui/AddressLink';
 import BookingWidget from '@/components/ui/BookingWidget';
 import PlaceGallery from '@/components/ui/PlaceGallery';
 import PerksWidget from '@/components/ui/PerksWidget';
+axios.defaults.withCredentials = true;
 
 const PlacePage = () => {
   const { id } = useParams();

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import axiosInstance from '@/utils/axios';
 import { usePlaces } from '../../../hooks';
+axios.defaults.withCredentials = true;
 
 const SearchBar = () => {
   const Places = usePlaces();
