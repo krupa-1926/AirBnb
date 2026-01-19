@@ -6,7 +6,7 @@ import PlaceImg from '@/components/ui/PlaceImg';
 import BookingDates from '@/components/ui/BookingDates';
 import Spinner from '@/components/ui/Spinner';
 import axiosInstance from '@/utils/axios';
-axios.defaults.withCredentials = true;
+
 
 const BookingsPage = () => {
   const [bookings, setBookings] = useState([]);

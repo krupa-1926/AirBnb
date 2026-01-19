@@ -7,7 +7,7 @@ import BookingDates from '../components/ui/BookingDates';
 import PlaceGallery from '../components/ui/PlaceGallery';
 import Spinner from '../components/ui/Spinner';
 import axiosInstance from '../utils/axios';
-axios.defaults.withCredentials = true;
+
 const SingleBookedPlace = () => {
   const { id } = useParams();
   const [booking, setBooking] = useState({});

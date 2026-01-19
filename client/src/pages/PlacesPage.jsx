@@ -6,7 +6,7 @@ import axiosInstance from '@/utils/axios';
 import AccountNav from '@/components/ui/AccountNav';
 import InfoCard from '@/components/ui/InfoCard';
 import Spinner from '@/components/ui/Spinner';
-axios.defaults.withCredentials = true;
+
 
 const PlacesPage = () => {
   const [places, setPlaces] = useState([]);

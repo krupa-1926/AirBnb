@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import { useAuth } from '../../../hooks';
 import axiosInstance from '@/utils/axios';
 import DatePickerWithRange from './DatePickerWithRange';
-axios.defaults.withCredentials = true;
+
 
 const BookingWidget = ({ place }) => {
   const [dateRange, setDateRange] = useState({ from: null, to: null });
