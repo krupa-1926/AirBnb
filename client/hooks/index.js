@@ -50,27 +50,45 @@ export const useProvideAuth = () => {
     }
   };
 
+  // const login = async (formData) => {
+  //   const { email, password } = formData;
+
+  //   try {
+  //     const { data } = await axiosInstance.post('/user/login', {
+  //       email,
+  //       password,
+  //     });
+  //     if (data.user && data.token) {
+  //       setUser(data.user);
+  //       // save user and token in local storage
+  //       setItemsInLocalStorage('user', data.user);
+  //       setItemsInLocalStorage('token', data.token);
+  //     }
+  //     return { success: true, message: 'Login successfull' };
+  //   } catch (error) {
+  //     const { message } = error.response.data;
+  //     return { success: false, message };
+  //   }
+  // };
+
   const login = async (formData) => {
-    const { email, password } = formData;
+  const res = await axios.post(
+    `${API_URL}/auth/login`,
+    formData,
+    { withCredentials: true }
+  );
 
-    try {
-      const { data } = await axiosInstance.post('/user/login', {
-        email,
-        password,
-      });
-      if (data.user && data.token) {
-        setUser(data.user);
-        // save user and token in local storage
-        setItemsInLocalStorage('user', data.user);
-        setItemsInLocalStorage('token', data.token);
-      }
-      return { success: true, message: 'Login successfull' };
-    } catch (error) {
-      const { message } = error.response.data;
-      return { success: false, message };
-    }
-  };
+  if (res.data.success) {
+    setUser(res.data.user);
 
+    // ✅ ADD THIS
+    localStorage.setItem("user", JSON.stringify(res.data.user));
+  }
+
+  return res.data;
+};
+
+  
   const googleLogin = async (credential) => {
     const decoded = jwt_decode(credential);
     try {
