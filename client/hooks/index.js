@@ -20,13 +20,27 @@ export const useProvideAuth = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  // useEffect(() => {
+  //   const storedUser = getItemFromLocalStorage('user');
+  //   if (storedUser) {
+  //     setUser(JSON.parse(storedUser));
+  //   }
+  //   setLoading(false);
+  // }, []);
+
   useEffect(() => {
-    const storedUser = getItemFromLocalStorage('user');
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
-    setLoading(false);
-  }, []);
+  const storedUser = getItemFromLocalStorage('user');
+  const token = getItemFromLocalStorage('token');
+
+  if (storedUser && token) {
+    setUser(JSON.parse(storedUser));
+  } else {
+    setUser(null);
+  }
+
+  setLoading(false);
+}, []);
+
 
   const register = async (formData) => {
     const { name, email, password } = formData;
