@@ -15,12 +15,12 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-app.use(cookieParser());
 
 const app = express();
 
 // middleware to handle json
 app.use(express.json());
+app.use(cookieParser());
 
 const whiteList = [
   'https://airbnbfrontend-five.vercel.app',
