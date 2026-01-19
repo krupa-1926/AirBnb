@@ -5,6 +5,12 @@ require('dotenv').config();
 const cloudinary = require('cloudinary').v2;
 const cookieParser = require('cookie-parser');
 
+const app = express();
+
+// middleware to handle json
+app.use(express.json());
+app.use(cookieParser());
+
 // connect with database
 connectWithDB();
 
@@ -16,11 +22,6 @@ cloudinary.config({
 });
 
 
-const app = express();
-
-// middleware to handle json
-app.use(express.json());
-app.use(cookieParser());
 
 const whiteList = [
   'https://airbnbfrontend-five.vercel.app',
