@@ -72,7 +72,7 @@ export const useProvideAuth = () => {
   // };
 
   const login = async (formData) => {
-  const res = await axios.post(
+  const res = await axiosInstance.post(
     `${API_URL}/auth/login`,
     formData,
     { withCredentials: true }
