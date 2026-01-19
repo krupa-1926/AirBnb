@@ -7,9 +7,6 @@ const cookieParser = require('cookie-parser');
 
 const app = express();
 
-// middleware to handle json
-app.use(express.json());
-app.use(cookieParser());
 
 // connect with database
 connectWithDB();
@@ -42,6 +39,10 @@ app.use(
     exposedHeaders: ['set-cookie'],
   })
 );
+
+// middleware to handle json
+app.use(express.json());
+app.use(cookieParser());
 
 // use express router
 app.use('/api', require('./routes'));
