@@ -50,45 +50,27 @@ export const useProvideAuth = () => {
     }
   };
 
-  // const login = async (formData) => {
-  //   const { email, password } = formData;
-
-  //   try {
-  //     const { data } = await axiosInstance.post('/user/login', {
-  //       email,
-  //       password,
-  //     });
-  //     if (data.user && data.token) {
-  //       setUser(data.user);
-  //       // save user and token in local storage
-  //       setItemsInLocalStorage('user', data.user);
-  //       setItemsInLocalStorage('token', data.token);
-  //     }
-  //     return { success: true, message: 'Login successfull' };
-  //   } catch (error) {
-  //     const { message } = error.response.data;
-  //     return { success: false, message };
-  //   }
-  // };
-
   const login = async (formData) => {
-  const res = await axiosInstance.post(
-    `user/login`,
-    formData,
-    { withCredentials: true }
-  );
+    const { email, password } = formData;
 
-  if (res.data.success) {
-    setUser(res.data.user);
+    try {
+      const { data } = await axiosInstance.post('/user/login', {
+        email,
+        password,
+      });
+      if (data.user && data.token) {
+        setUser(data.user);
+        // save user and token in local storage
+        setItemsInLocalStorage('user', data.user);
+        setItemsInLocalStorage('token', data.token);
+      }
+      return { success: true, message: 'Login successfull' };
+    } catch (error) {
+      const { message } = error.response.data;
+      return { success: false, message };
+    }
+  };
 
-    // ✅ ADD THIS
-    localStorage.setItem("user", JSON.stringify(res.data.user));
-  }
-
-  return res.data;
-};
-
-  
   const googleLogin = async (credential) => {
     const decoded = jwt_decode(credential);
     try {
@@ -151,15 +133,10 @@ export const useProvideAuth = () => {
     try {
       const { data } = await axiosInstance.put(
         '/user/update-user',
-        name,
+       { name,
         password,
         email,
-        picture,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
+        picture},
       );
 
       if (data.success) {
@@ -196,7 +173,7 @@ export const useProvidePlaces = () => {
   const [loading, setLoading] = useState(true);
 
   const getPlaces = async () => {
-    const { data } = await axiosInstance.get('/places', { withCredentials: true });
+    const { data } = await axiosInstance.get('/places');
     setPlaces(data.places);
     setLoading(false);
   };
