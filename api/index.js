@@ -20,26 +20,31 @@ cloudinary.config({
 
 
 
-const whiteList = [
-  'https://airbnbfrontend-five.vercel.app',
-  'http://localhost:5173',
-];
+// const whiteList = [
+//   'https://airbnbfrontend-five.vercel.app',
+//   'http://localhost:5173',
+// ];
 
-// CORS 
+// // CORS 
+// app.use(
+//   cors({
+//     credentials: true,
+//     origin: function (origin, callback) {
+//       if (!origin || whiteList.includes(origin)) {
+//         callback(null, true);
+//       } else {
+//         callback(new Error('Not allowed by cors'));
+//       }
+//     },
+//     exposedHeaders: ['set-cookie'],
+//   })
+// );
 app.use(
   cors({
+    origin: "https://airbnbfrontend-five.vercel.app",
     credentials: true,
-    origin: function (origin, callback) {
-      if (!origin || whiteList.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error('Not allowed by cors'));
-      }
-    },
-    exposedHeaders: ['set-cookie'],
   })
 );
-
 // middleware to handle json
 app.use(express.json());
 app.use(cookieParser());

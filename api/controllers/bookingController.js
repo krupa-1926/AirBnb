@@ -2,29 +2,49 @@ const Booking = require('../models/Booking');
 const userFromToken = require('../utils/userFromToken');
 
 exports.createBookings = async (req, res) => {
-  try {
-    const userData = userFromToken(req);
-    const { place, checkIn, checkOut, numOfGuests, name, phone, price } =
-      req.body;
+//   try {
+//     const userData = userFromToken(req);
+//     const { place, checkIn, checkOut, numOfGuests, name, phone, price } =
+//       req.body;
 
-      if (!req.user) {
-  return res.status(401).json({ message: "Unauthorized" });
-}
+//       if (!req.user) {
+//   return res.status(401).json({ message: "Unauthorized" });
+// }
+//     const booking = await Booking.create({
+//       user: req.user._id,
+//       place,
+//       checkIn,
+//       checkOut,
+//       numOfGuests,
+//       name,
+//       phone,
+//       price,
+//     });
+
+//     res.status(200).json({
+//       booking,
+//     });
+//   }
+ try {
+    if (!req.user) {
+      return res.status(401).json({ message: "Login required" });
+    }
+
+    const { place, checkIn, checkOut, name, phone, price } = req.body;
+
     const booking = await Booking.create({
       user: req.user._id,
       place,
       checkIn,
       checkOut,
-      numOfGuests,
       name,
       phone,
       price,
     });
 
-    res.status(200).json({
-      booking,
-    });
-  } catch (err) {
+    res.status(200).json(booking);
+  } 
+   catch (err) {
     res.status(500).json({
       message: 'Internal server error',
       error: err,
