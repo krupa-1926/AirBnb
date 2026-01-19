@@ -156,7 +156,16 @@ exports.login = async (req, res) => {
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '7d' });
 
     user.password = undefined;
-    res.status(200).json({ user, token });
+    // res.status(200).json({ user, token });
+    res.cookie('token', token, {
+    httpOnly: true,
+    secure: true,        // REQUIRED on HTTPS
+    sameSite: 'none',    // REQUIRED cross-domain
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+  })
+  .status(200)
+  .json({ user });
+
   } catch (err) {
     res.status(500).json({ message: 'Server error', error: err.message });
   }
@@ -206,7 +215,13 @@ exports.updateUser = async (req, res) => {
 
 // ================= LOGOUT =================
 exports.logout = async (req, res) => {
-  res.cookie('token', '', { httpOnly: true, expires: new Date(0) }).json({
-    message: 'Logged out successfully!',
-  });
+  res
+    .cookie('token', '', {
+      httpOnly: true,
+      secure: true,
+      sameSite: 'none',
+      expires: new Date(0),
+    })
+    .json({ message: 'Logged out successfully' });
 };
+

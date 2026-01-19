@@ -3,6 +3,7 @@ const cors = require('cors');
 const connectWithDB = require('./config/db');
 require('dotenv').config();
 const cloudinary = require('cloudinary').v2;
+const cookieParser = require('cookie-parser');
 
 // connect with database
 connectWithDB();
@@ -13,6 +14,8 @@ cloudinary.config({
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
+
+app.use(cookieParser());
 
 const app = express();
 
