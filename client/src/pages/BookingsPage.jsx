@@ -14,7 +14,7 @@ const BookingsPage = () => {
   useEffect(() => {
     const getBookings = async () => {
       try {
-        const { data } = await axiosInstance.get('/bookings');
+        const { data } = await axiosInstance.get('/bookings' , { withCredentials: true });
         setBookings(data.booking);
         setLoading(false);
       } catch (error) {

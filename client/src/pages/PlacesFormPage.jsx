@@ -91,7 +91,7 @@ const PlacesFormPage = () => {
       return;
     }
     setLoading(true);
-    axiosInstance.get(`/places/${id}`).then((response) => {
+    axiosInstance.get(`/places/${id}` , { withCredentials: true }).then((response) => {
       const { place } = response.data;
       // update the state of formData
       for (let key in formData) {
