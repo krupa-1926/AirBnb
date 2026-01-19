@@ -1,50 +1,30 @@
-const Booking = require('../models/Booking');
-const userFromToken = require('../utils/userFromToken');
+const Booking = require("../models/Booking");
+const userFromToken = require("../utils/userFromToken");
 
 exports.createBookings = async (req, res) => {
-//   try {
-//     const userData = userFromToken(req);
-//     const { place, checkIn, checkOut, numOfGuests, name, phone, price } =
-//       req.body;
+  try {
+    const userData = userFromToken(req);
+    const { place, checkIn, checkOut, numOfGuests, name, phone, price } =
+      req.body;
 
-//       if (!req.user) {
-//   return res.status(401).json({ message: "Unauthorized" });
-// }
-//     const booking = await Booking.create({
-//       user: req.user._id,
-//       place,
-//       checkIn,
-//       checkOut,
-//       numOfGuests,
-//       name,
-//       phone,
-//       price,
-//     });
-
-//     res.status(200).json({
-//       booking,
-//     });
-//   }
- try {
-    if (!req.user) {
+    if (!userData) {
       return res.status(401).json({ message: "Login required" });
     }
-
-    const { place, checkIn, checkOut, name, phone, price } = req.body;
-
     const booking = await Booking.create({
-      user: req.user._id,
+      user: userData.id,
       place,
       checkIn,
       checkOut,
+      numOfGuests,
       name,
       phone,
       price,
     });
 
-    res.status(200).json(booking);
-  } 
-   catch (err) {
+    res.status(200).json({
+      booking,
+    });
+  } catch (err) {
     res.status(500).json({
       message: 'Internal server error',
       error: err,
@@ -58,19 +38,16 @@ exports.getBookings = async (req, res) => {
     if (!userData) {
       return res
         .status(401)
-        .json({ error: 'You are not authorized to access this page!' });
+        .json({ error: "You are not authorized to access this page!" });
     }
 
-    const booking = await Booking.find({ user: userData.id }).populate('place')
+    const booking = await Booking.find({ user: userData.id }).populate("place");
 
-    res
-      .status(200).json({ booking, success: true })
-
-
+    res.status(200).json({ booking, success: true });
   } catch (err) {
     console.log(err);
     res.status(500).json({
-      message: 'Internal server error',
+      message: "Internal server error",
       error: err,
     });
   }
