@@ -162,6 +162,7 @@ exports.login = async (req, res) => {
   secure: true,
   sameSite: 'none',
   path: '/',
+   domain: '.onrender.com',
 }).json({
   _id: user._id,
   name: user.name,
@@ -216,11 +217,26 @@ exports.updateUser = async (req, res) => {
 };
 
 // ================= LOGOUT =================
+// exports.logout = (req, res) => {
+//   return res
+//     .cookie("token", "", { expires: new Date(0) })
+//     .status(200)
+//     .json({ message: "Logged out successfully" });
+// };
+
+// ================= LOGOUT =================
 exports.logout = (req, res) => {
   return res
-    .cookie("token", "", { expires: new Date(0) })
+    .cookie('token', '', {
+      httpOnly: true,
+      secure: true,
+      sameSite: 'none',
+      path: '/',
+      domain: '.onrender.com',
+      expires: new Date(0),
+    })
     .status(200)
-    .json({ message: "Logged out successfully" });
+    .json({ message: 'Logged out successfully' });
 };
 
 
