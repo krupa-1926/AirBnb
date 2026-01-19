@@ -43,6 +43,7 @@ app.use(
   cors({
     origin: "https://airbnbfrontend-five.vercel.app",
     credentials: true,
+    exposedHeaders: ['set-cookie'],
   })
 );
 // middleware to handle json
